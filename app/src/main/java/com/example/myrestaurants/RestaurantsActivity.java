@@ -4,22 +4,58 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RestaurantsActivity extends AppCompatActivity {
-    private TextView mLocationTextView; // declare member variable
+//    private TextView mLocationTextView; // declare member variable
+    @BindView(R.id.locationTextView) TextView mLocationTextView;
+
+//    private ListView mListView; // declare an mListView member variable
+    @BindView(R.id.listView) ListView mListView;
+
+    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
+
+    public static final String TAG = RestaurantsActivity.class.getSimpleName(); // Defines a tag constant to use in an activity's log methods
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
+        ButterKnife.bind(this);
 
-        mLocationTextView = (TextView) findViewById(R.id.locationTextView); // define the member variable
+//        mListView = (ListView) findViewById(R.id.listView); // defines the mListView variable by locating it's specific id using the findViewById() method
+//        mLocationTextView = (TextView) findViewById(R.id.locationTextView); // define the member variable
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants); // creates a new array adapter with three arguments: current context, list layout, array list.
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String restraurant = ((TextView)view).getText().toString();
+
+                Toast.makeText(RestaurantsActivity.this, restraurant, Toast.LENGTH_LONG).show();
+//                Log.v("RestaurantActivity", "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
+                Log.v(TAG, "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
+            }
+        });
 
         // pull the data out of the intent extra
         Intent intent = getIntent(); // recreates the intent
         String location = intent.getStringExtra("location"); // pulls out the location value based on the key value we provided.
         mLocationTextView.setText("Here are all the restaurants near: " + location);
+
+//        Log.d("RestaurantActivity", "In the onCreate method!"); // a second log of different importance level
+        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
     }
 
 }
