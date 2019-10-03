@@ -23,6 +23,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     @BindView(R.id.listView) ListView mListView;
 
     private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
+    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fish Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican"};
 
     public static final String TAG = RestaurantsActivity.class.getSimpleName(); // Defines a tag constant to use in an activity's log methods
 
@@ -45,7 +46,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 
                 Toast.makeText(RestaurantsActivity.this, restraurant, Toast.LENGTH_LONG).show();
 //                Log.v("RestaurantActivity", "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
-                Log.v(TAG, "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
+//                Log.v(TAG, "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
             }
         });
 
@@ -55,7 +56,7 @@ public class RestaurantsActivity extends AppCompatActivity {
         mLocationTextView.setText("Here are all the restaurants near: " + location);
 
 //        Log.d("RestaurantActivity", "In the onCreate method!"); // a second log of different importance level
-        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
+//        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
     }
 
 }

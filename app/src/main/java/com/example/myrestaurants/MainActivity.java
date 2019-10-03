@@ -8,24 +8,30 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button mFindRestaurantsButton; //adds a member variable to hold our button so that we can access it inside all of our methods
+//  private Button mFindRestaurantsButton; //adds a member variable to hold our button so that we can access it inside all of our methods
+    @BindView(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
-    private EditText mLocationEditText; // initialize a new member variable for our EditText
+//  private EditText mLocationEditText; // initialize a new member variable for our EditText
+    @BindView(R.id.locationEditText) EditText mLocationEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);      // causes android to run all the default behaviours for an activity
         setContentView(R.layout.activity_main); // tells the activity which layout to use on the device screen
+        ButterKnife.bind(this);
 
-        mLocationEditText = (EditText) findViewById(R.id.locationEditText); //set the EditText variable
-
-        mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton); // set the button variable
+//        mLocationEditText = (EditText) findViewById(R.id.locationEditText); //set the EditText variable
+//        mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton); // set the button variable
 
         mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() { // adds a click listener which will be triggered when our button is touched
             @Override

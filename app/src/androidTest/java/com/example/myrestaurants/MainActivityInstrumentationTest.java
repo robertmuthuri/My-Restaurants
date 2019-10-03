@@ -61,5 +61,4 @@ public class MainActivityInstrumentationTest {
                 (withText("Here are all the restaurants near: " + location)));
     }
 
-
 }
