@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
 
 public class RestaurantsActivity extends AppCompatActivity {
 //    private TextView mLocationTextView; // declare member variable
@@ -57,6 +58,9 @@ public class RestaurantsActivity extends AppCompatActivity {
 
 //        Log.d("RestaurantActivity", "In the onCreate method!"); // a second log of different importance level
 //        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
+
+        YelpApi client = YelpClient.getClient();
+        Call<YelpBusinessesSearchResponse> call = client.getRestaurants(location, "restaurants");
     }
 
 }
