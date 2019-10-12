@@ -27,8 +27,8 @@ public class RestaurantsActivity extends AppCompatActivity {
 //    private ListView mListView; // declare an mListView member variable
     @BindView(R.id.listView) ListView mListView;
 
-    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
-    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fish Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican"};
+//    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
+//    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fish Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican"};
 
     public static final String TAG = RestaurantsActivity.class.getSimpleName(); // Defines a tag constant to use in an activity's log methods
 
