@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RestaurantsActivity">
-            //Adds an up button - arrow button on the left side of the app bar in the restaurant activity
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.myrestaurants.MainActivity"
@@ -18,10 +17,9 @@
         </activity>
         <activity android:name=".MainActivity"
             android:theme="@style/NoActionBarTheme">
-            <intent-filter> //denotes the type of intents an activity may receive
-                <action android:name="android.intent.action.MAIN" /> //denotes the activity to start by default
-
-                <category android:name="android.intent.category.LAUNCHER" /> //denotes that this activity is the initial activity and is listed in the device application launcher
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
