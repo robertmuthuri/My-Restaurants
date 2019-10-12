@@ -36,7 +36,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 //        mListView = (ListView) findViewById(R.id.listView); // defines the mListView variable by locating it's specific id using the findViewById() method
 //        mLocationTextView = (TextView) findViewById(R.id.locationTextView); // define the member variable
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants); // creates a new array adapter with three arguments: current context, list layout, array list.
+        MyRestaurantsArrayAdapter adapter = new MyRestaurantsArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants, cuisines); // creates a new array adapter with three arguments: current context, list layout, array list.
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

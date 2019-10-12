@@ -1,11 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"> // removes the App Bar from all the activities in our app.-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"> // retains the app theme so the no bar theme below can only be applied to the main acitivty
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
     </style>
 
 </resources>
