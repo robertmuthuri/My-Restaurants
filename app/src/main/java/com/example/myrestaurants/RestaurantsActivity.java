@@ -12,9 +12,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RestaurantsActivity extends AppCompatActivity {
 //    private TextView mLocationTextView; // declare member variable
@@ -37,8 +41,8 @@ public class RestaurantsActivity extends AppCompatActivity {
 //        mListView = (ListView) findViewById(R.id.listView); // defines the mListView variable by locating it's specific id using the findViewById() method
 //        mLocationTextView = (TextView) findViewById(R.id.locationTextView); // define the member variable
 
-        MyRestaurantsArrayAdapter adapter = new MyRestaurantsArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants, cuisines); // creates a new array adapter with three arguments: current context, list layout, array list.
-        mListView.setAdapter(adapter);
+//        MyRestaurantsArrayAdapter adapter = new MyRestaurantsArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants, cuisines); // creates a new array adapter with three arguments: current context, list layout, array list.
+//        mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,6 +65,30 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         YelpApi client = YelpClient.getClient();
         Call<YelpBusinessesSearchResponse> call = client.getRestaurants(location, "restaurants");
+
+        call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
+            @Override
+            public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Business> restaurantsList = response.body().getBusinesses();
+                    String[] restaurants = new String[restaurantsList.size()];
+                    String[] categories = new String[restaurantsList.size()];
+
+                    for (int i = 0; i < restaurants.length; i++) {
+                        restaurants[i] = restaurantsList.get(i).getName();
+                    }
+                    for (int i = 0; i < categories.length; i++) {
+                        Category category = restaurantsList.get(i).getCategories().get(0);
+                        categories[i] = category.getTitle();
+                    }
+                    ArrayAdapter adapter = new MyRestaurantsArrayAdapter(RestaurantsActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
+                    mListView.setAdapter(adapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<YelpBusinessesSearchResponse> call, Throwable t) {
+            }
+        });
     }
 
 }
