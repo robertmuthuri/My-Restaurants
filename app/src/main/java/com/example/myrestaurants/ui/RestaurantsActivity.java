@@ -108,10 +108,10 @@ public class RestaurantsActivity extends AppCompatActivity {
                     //associate adapter with recycle view
                     mRecyclerView.setAdapter(mAdapter);
                     // Instantiate layout manager
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManage   r(RestaurantsActivity.this);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RestaurantsActivity.this);
                     // Assign layout manager to overridden response method
                     mRecyclerView.setLayoutManager(layoutManager);
-                    // inform mRecyclerView that its width and height should always remain the same so it doesn't reset its own size to best fit the content as indidivual list item views are continually recycled.
+                    // inform mRecyclerView that its width and height should always remain the same so it doesn't reset its own size to best fit the content as individual list item views are continually recycled.
                     mRecyclerView.setHasFixedSize(true);
                     showRestaurants();
                 } else {

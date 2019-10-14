@@ -59,6 +59,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             mNameTextView.setText(restaurant.getName());
             mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+            Picasso.get().load(restaurant.getImageUrl()).into(mRestaurantImageView);
         }
 
     }
