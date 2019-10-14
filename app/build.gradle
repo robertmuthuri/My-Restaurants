@@ -46,5 +46,8 @@ android {
 
         //RecyclerView
         implementation 'androidx.recyclerview:recyclerview:1.0.0'
+        // Picasso
+        implementation 'com.squareup.picasso:picasso:2.5.2'
+
     }
 }

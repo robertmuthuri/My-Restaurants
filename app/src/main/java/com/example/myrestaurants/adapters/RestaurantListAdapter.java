@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Business;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
