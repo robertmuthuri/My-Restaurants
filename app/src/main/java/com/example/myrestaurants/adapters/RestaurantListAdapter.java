@@ -1,7 +1,9 @@
 package com.example.myrestaurants.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +24,21 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         mContext = context;
         mRestaurants = restaurants;
     }
+    // on-create recycler view-holder adapter method
+    @Override
+    public RestaurantListAdapter.RestaurantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_list_item, parent, false);
+        RestaurantViewHolder viewHolder = new RestaurantViewHolder(view);
+        return viewHolder;
+    }
+    //on-bind recycler view-holder adapter method
+    @Override
+    public void onBindViewHolder(RestaurantListAdapter.RestaurantViewHolder holder, int position) {
+        holder.bindRestaurant(mRestaurants.get(position));
+    }
+    //get item count recycler view-holder adapter method
+    @Override public int getItemCount() { return mRestaurants.size(); }
+
     // inner class/nested class for the view holder.
     public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.restaurantImageView) ImageView mRestaurantImageView;
