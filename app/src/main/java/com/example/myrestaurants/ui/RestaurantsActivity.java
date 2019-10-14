@@ -1,4 +1,4 @@
-package com.example.myrestaurants;
+package com.example.myrestaurants.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myrestaurants.MyRestaurantsArrayAdapter;
+import com.example.myrestaurants.R;
+import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.models.Category;
+import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
+import com.example.myrestaurants.network.YelpApi;
+import com.example.myrestaurants.network.YelpClient;
 
 import java.util.List;
 
@@ -26,6 +35,9 @@ public class RestaurantsActivity extends AppCompatActivity {
 
 //    private ListView mListView; // declare an mListView member variable
     @BindView(R.id.listView) ListView mListView;
+
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
 
 //    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
 //    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fish Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican"};
@@ -69,6 +81,7 @@ public class RestaurantsActivity extends AppCompatActivity {
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override
             public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
+                hideProgressBar();
                 if (response.isSuccessful()) {
                     List<Business> restaurantsList = response.body().getBusinesses();
                     String[] restaurants = new String[restaurantsList.size()];
@@ -83,12 +96,33 @@ public class RestaurantsActivity extends AppCompatActivity {
                     }
                     ArrayAdapter adapter = new MyRestaurantsArrayAdapter(RestaurantsActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
                     mListView.setAdapter(adapter);
+                    showRestaurants();
+                } else {
+                    showUnsuccessfulMessage();
                 }
             }
             @Override
             public void onFailure(Call<YelpBusinessesSearchResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: ", t);
+                hideProgressBar();
+                showFailureMessage();
             }
         });
+    }
+    private void showFailureMessage() {
+        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+    private void showRestaurants() {
+        mListView.setVisibility(View.VISIBLE);
+        mLocationTextView.setVisibility(View.VISIBLE);
+    }
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
     }
 
 }
