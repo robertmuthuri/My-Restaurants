@@ -24,7 +24,7 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"/>
         <TextView
-            android:text="Cuisine Type"
+            android:text="One Cuisine Type"
             android:id="@+id/categoryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
