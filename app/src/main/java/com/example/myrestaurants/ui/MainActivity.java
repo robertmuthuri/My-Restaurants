@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //                Toast.makeText(MainActivity.this, "Hello World", Toast.LENGTH_LONG).show();
 
             // Add an intent - something our app "intends to do: by describing a simple action you'd like the app to perform; mostly used to start another activity
-            Intent myIntent = new Intent(MainActivity.this, RestaurantsActivity.class); // initiate an instance of the Intent class with the current and next contexts
+            Intent myIntent = new Intent(MainActivity.this, RestaurantsListActivity.class); // initiate an instance of the Intent class with the current and next contexts
             myIntent.putExtra("location", location);
             startActivity(myIntent); // executes the intent
     //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show(); // makes a toast to confirm that zip location keyed in.

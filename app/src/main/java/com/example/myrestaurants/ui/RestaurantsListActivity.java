@@ -8,18 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.myrestaurants.MyRestaurantsArrayAdapter;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
-import com.example.myrestaurants.models.Category;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
@@ -32,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestaurantsActivity extends AppCompatActivity {
+public class RestaurantsListActivity extends AppCompatActivity {
 //    private TextView mLocationTextView; // declare member variable
 //    @BindView(R.id.locationTextView) TextView mLocationTextView;
 //    private ListView mListView; // declare an mListView member variable
@@ -48,7 +42,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 //    private String[] restaurants = new String[] {"Mi Mero Mole", "Mother's Bistro", "life of Pie", "Screen door", "Luc Lac", "Sweet Basil", "Slappy Cakes", "Equinox", "Miss Delta's", "Andina", "Lardo", "Portland City Grill", "Fat Head's Brewery", "Chipotle", "Subway"};
 //    private String[] cuisines = new String[] {"Vegan Food", "Breakfast", "Fish Dishs", "Scandinavian", "Coffee", "English Food", "Burgers", "Fast Food", "Noodle Soups", "Mexican", "BBQ", "Cuban", "Bar Food", "Sports Bar", "Breakfast", "Mexican"};
 
-    public static final String TAG = RestaurantsActivity.class.getSimpleName(); // Defines a tag constant to use in an activity's log methods
+    public static final String TAG = RestaurantsListActivity.class.getSimpleName(); // Defines a tag constant to use in an activity's log methods
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +61,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                String restaurant = ((TextView)view).getText().toString();
 //
-//                Toast.makeText(RestaurantsActivity.this, restaurant, Toast.LENGTH_LONG).show();
+//                Toast.makeText(RestaurantsListActivity.this, restaurant, Toast.LENGTH_LONG).show();
 ////                Log.v("RestaurantActivity", "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
 ////                Log.v(TAG, "In the onItemClickListener!"); // when the code is triggered - a click on a restaurant - the message "In the onItemClickListener appears in the logcat.
 //            }
@@ -100,15 +94,15 @@ public class RestaurantsActivity extends AppCompatActivity {
 //                        Category category = restaurantsList.get(i).getCategories().get(0);
 //                        categories[i] = category.getTitle();
 //                    }
-//                    ArrayAdapter adapter = new MyRestaurantsArrayAdapter(RestaurantsActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
+//                    ArrayAdapter adapter = new MyRestaurantsArrayAdapter(RestaurantsListActivity.this, android.R.layout.simple_list_item_1, restaurants, categories);
 //                    mListView.setAdapter(adapter);
                     restaurants = response.body().getBusinesses();
                     //instantiate adapter
-                    mAdapter = new RestaurantListAdapter(RestaurantsActivity.this, restaurants);
+                    mAdapter = new RestaurantListAdapter(RestaurantsListActivity.this, restaurants);
                     //associate adapter with recycle view
                     mRecyclerView.setAdapter(mAdapter);
                     // Instantiate layout manager
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RestaurantsActivity.this);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(RestaurantsListActivity.this);
                     // Assign layout manager to overridden response method
                     mRecyclerView.setLayoutManager(layoutManager);
                     // inform mRecyclerView that its width and height should always remain the same so it doesn't reset its own size to best fit the content as individual list item views are continually recycled.
