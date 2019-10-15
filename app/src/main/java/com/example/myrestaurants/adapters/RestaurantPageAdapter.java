@@ -18,6 +18,8 @@ public class RestaurantPageAdapter extends FragmentPagerAdapter {
     }
     @Override public Fragment getItem(int position) { return RestaurantDetailFragment.newInstance(mRestaurants.get(position)); }
 
+    @Override public int getCount() { return mRestaurants.size(); }
+
 
 
 }
