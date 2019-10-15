@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import com.example.myrestaurants.R;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Add an intent - something our app "intends to do: by describing a simple action you'd like the app to perform; mostly used to start another activity
             Intent myIntent = new Intent(MainActivity.this, RestaurantsListActivity.class); // initiate an instance of the Intent class with the current and next contexts
-            myIntent.putExtra("location", location);
+            myIntent.putExtra("location", Parcels.wrap(location));
             startActivity(myIntent); // executes the intent
     //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show(); // makes a toast to confirm that zip location keyed in.
 

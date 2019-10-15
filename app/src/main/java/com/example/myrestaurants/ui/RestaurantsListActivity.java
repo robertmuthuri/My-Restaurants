@@ -18,6 +18,8 @@ import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +70,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
 //        });
 
         // pull the data out of the intent extra
-        Intent intent = getIntent(); // recreates the intent
+        Intent intent = Parcels.unwrap(getIntent().getParcelableExtra("location")); // recreates the intent
         String location = intent.getStringExtra("location"); // pulls out the location value based on the key value we provided.
 //        mLocationTextView.setText("Here are all the restaurants near: " + location);
 
