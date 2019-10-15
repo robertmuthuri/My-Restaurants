@@ -83,7 +83,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"/>
                 <TextView
-                    android:Text="(503) 223-1282"
+                    android:text="(503) 223-1282"
                     android:id="@+id/phoneTextView"
                     android:drawableLeft="@drawable/ic_call_white_24dp"
                     android:layout_width="wrap_content"
