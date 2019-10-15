@@ -16,6 +16,8 @@ public class RestaurantPageAdapter extends FragmentPagerAdapter {
         super(fm, behaviour);
         mRestaurants = restaurants;
     }
+    @Override public Fragment getItem(int position) { return RestaurantDetailFragment.newInstance(mRestaurants.get(position)); }
+
 
 
 }
