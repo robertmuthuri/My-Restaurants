@@ -1,6 +1,7 @@
 package com.example.myrestaurants.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.ui.RestaurantDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +46,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     @Override public int getItemCount() { return mRestaurants.size(); }
 
     // inner class/nested class for the view holder.
-    public class RestaurantViewHolder extends RecyclerView.ViewHolder {
+    public class RestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.restaurantImageView) ImageView mRestaurantImageView;
         @BindView(R.id.restaurantNameTextView) TextView mNameTextView;
         @BindView(R.id.categoryTextView) TextView mCategoryTextView;
@@ -61,6 +66,13 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
             Picasso.get().load(restaurant.getImageUrl()).into(mRestaurantImageView);
         }
-
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+            mContext.startActivity(intent);
+        }
     }
 }
