@@ -20,6 +20,6 @@ public class RestaurantPageAdapter extends FragmentPagerAdapter {
 
     @Override public int getCount() { return mRestaurants.size(); }
 
-
+    @Override public CharSequence getPageTitle(int position) { return mRestaurants.get(position).getName(); }
 
 }
