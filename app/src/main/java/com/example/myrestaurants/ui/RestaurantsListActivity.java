@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.models.Location;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
 import com.example.myrestaurants.network.YelpClient;
@@ -70,15 +71,17 @@ public class RestaurantsListActivity extends AppCompatActivity {
 //        });
 
         // pull the data out of the intent extra
-        Intent intent = Parcels.unwrap(getIntent().getParcelableExtra("location")); // recreates the intent
-        String location = intent.getStringExtra("location"); // pulls out the location value based on the key value we provided.
+//        Intent intent = Parcels.unwrap(getIntent().getParcelableExtra("location")); // recreates the intent
+        Intent intent = getIntent();
+//        String myLocation = intent.getParcelable("location"); // pulls out the location value based on the key value we provided.
+        String myLocation = Parcels.unwrap(intent.getParcelableExtra("location")); // pulls out the location value based on the key value we provided.
 //        mLocationTextView.setText("Here are all the restaurants near: " + location);
 
 //        Log.d("RestaurantActivity", "In the onCreate method!"); // a second log of different importance level
 //        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
 
         YelpApi client = YelpClient.getClient();
-        Call<YelpBusinessesSearchResponse> call = client.getRestaurants(location, "restaurants");
+        Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
 
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override
