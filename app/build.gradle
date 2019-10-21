@@ -39,11 +39,9 @@ android {
         //butterKnife
         implementation 'com.jakewharton:butterknife:10.2.0'
         annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
-
         //Retrofit
         implementation 'com.squareup.retrofit2:retrofit:2.5.0'
         implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-
         //RecyclerView
         implementation 'androidx.recyclerview:recyclerview:1.0.0'
         // Picasso
@@ -51,7 +49,8 @@ android {
         //Parceler
         implementation 'org.parceler:parceler-api:1.1.12'
         annotationProcessor 'org.parceler:parceler:1.1.12'
-
+        // Firebase SDK for Google Analytics
+        implementation 'com.google.firebase:firebase-analytics:17.2.0'
     }
 }
 
@@ -60,3 +59,5 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:+'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
