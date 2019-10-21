@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.RestaurantListAdapter;
 import com.example.myrestaurants.models.Business;
+import com.example.myrestaurants.models.Constants;
 import com.example.myrestaurants.models.Location;
 import com.example.myrestaurants.models.YelpBusinessesSearchResponse;
 import com.example.myrestaurants.network.YelpApi;
@@ -30,6 +33,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RestaurantsListActivity extends AppCompatActivity {
+
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
+
 //    private TextView mLocationTextView; // declare member variable
 //    @BindView(R.id.locationTextView) TextView mLocationTextView;
 //    private ListView mListView; // declare an mListView member variable
@@ -124,6 +131,10 @@ public class RestaurantsListActivity extends AppCompatActivity {
                 showFailureMessage();
             }
         });
+        // Call the dedicated preference manager to access shared preferences
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
     }
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
