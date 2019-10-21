@@ -90,6 +90,14 @@ public class RestaurantsListActivity extends AppCompatActivity {
         YelpApi client = YelpClient.getClient();
         Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
 
+        // Call the dedicated preference manager to access shared preferences
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
+        if (mRecentAddress != null) {
+            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
+        }
+
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override
             public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
@@ -131,10 +139,6 @@ public class RestaurantsListActivity extends AppCompatActivity {
                 showFailureMessage();
             }
         });
-        // Call the dedicated preference manager to access shared preferences
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
     }
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");

@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mFindRestaurantsButton) {
             String location = mLocationEditText.getText().toString(); // use the getText() method to grab the input value of our EditText view and save to location
             Log.d(TAG, location); // log the input text
-            addToSharedPreferences(location);
+            if (!(location).equals("")) {
+                addToSharedPreferences(location);
+            }
 
             // add a toast  - a simple pop up message that automatically fades in and out of the screen when triggered.
             // a toast takes three parameters - a context - a message - a duration
