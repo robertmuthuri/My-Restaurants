@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:678306308714:android:5397d7f20b65ad1b026013",
+        "mobilesdk_app_id": "1:678306308714:android:6893653e2b75982b026013",
         "android_client_info": {
-          "package_name": "com.example.myrestaurants.ui"
+          "package_name": "com.example.myrestaurants"
         }
       },
       "oauth_client": [
         {
-          "client_id": "678306308714-83ni31tska32hj25pr4lipno5b8k7gku.apps.googleusercontent.com",
+          "client_id": "678306308714-4ubou6p51fi4ar7pinlorcmgbigr1eiv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.myrestaurants.ui",
+            "package_name": "com.example.myrestaurants",
             "certificate_hash": "e4de6aa0e351d261f00505a18fcb952061c57831"
           }
         },
