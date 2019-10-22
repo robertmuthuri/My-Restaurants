@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
 
+
     // Create member variables to store refs to shared preferences tool itself
     private SharedPreferences mSharedPreferences;
     // Create the dedicated tool to edit the foregoing variables.
