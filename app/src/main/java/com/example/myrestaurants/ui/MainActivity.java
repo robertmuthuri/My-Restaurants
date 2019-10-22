@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Instantiates database reference passing the constant as argument
         databaseReference.child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
 
+        // Assign event-listener variable to event listener
         // Add a value event listener to our db reference
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        mSearchedLocationReValueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
