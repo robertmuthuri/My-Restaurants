@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
 
-    // Adds instance of the searchedLocations DatabaseReference
-    private DatabaseReference mSearchedLocationReferences;
+    // Declare a member variable for the value event listener
+    private ValueEventListener mSearchedLocationReValueEventListener;
+
     // Create member variables to store refs to shared preferences tool itself
 //    private SharedPreferences mSharedPreferences;
     // Create the dedicated tool to edit the foregoing variables.
@@ -50,15 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Add a value event listener to our db reference
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
                     String location = locationSnapshot.getValue().toString();
                     Log.d("Locations updated", "location: " + location);
                 }
-
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -109,5 +109,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Create method to save location to database
     public void saveLocationToFirebase(String location) {
         databaseReference.push().setValue(location);
+    }
+    // Add method to destroy value-event-listener when user quits activity
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        databaseReference.removeEventListener(mSearchedLocationReValueEventListener);
     }
 }
