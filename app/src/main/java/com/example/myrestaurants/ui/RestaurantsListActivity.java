@@ -91,12 +91,12 @@ public class RestaurantsListActivity extends AppCompatActivity {
         Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
 
         // Call the dedicated preference manager to access shared preferences
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 //        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
-        if (mRecentAddress != null) {
-            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
-        }
+//        if (mRecentAddress != null) {
+//            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
+//        }
 
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override

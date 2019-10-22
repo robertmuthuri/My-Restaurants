@@ -23,13 +23,14 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference();
+    private DatabaseReference databaseReference = database.getReference();
 
-
+    // Adds instance of the searchedLocations DatabaseReference
+    private DatabaseReference mSearchedLocationReferences;
     // Create member variables to store refs to shared preferences tool itself
-    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences mSharedPreferences;
     // Create the dedicated tool to edit the foregoing variables.
-    private SharedPreferences.Editor mEditor;
+//    private SharedPreferences.Editor mEditor;
 
 //  private Button mFindRestaurantsButton; //adds a member variable to hold our button so that we can access it inside all of our methods
     @BindView(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
@@ -39,12 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Instantiates database reference passing the constant as argument
+        databaseReference.child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
+
         super.onCreate(savedInstanceState);      // causes android to run all the default behaviours for an activity
         setContentView(R.layout.activity_main); // tells the activity which layout to use on the device screen
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mEditor = mSharedPreferences.edit();
 
 //        mLocationEditText = (EditText) findViewById(R.id.locationEditText); //set the EditText variable
 //        mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton); // set the button variable
@@ -58,9 +62,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mFindRestaurantsButton) {
             String location = mLocationEditText.getText().toString(); // use the getText() method to grab the input value of our EditText view and save to location
             Log.d(TAG, location); // log the input text
-            if (!(location).equals("")) {
-                addToSharedPreferences(location);
-            }
+            saveLocationToFirebase(location);
+//            if (!(location).equals("")) {
+//                addToSharedPreferences(location);
+//            }
 
             // add a toast  - a simple pop up message that automatically fades in and out of the screen when triggered.
             // a toast takes three parameters - a context - a message - a duration
@@ -76,8 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     // Create method which takes user input zip-code as argument
-    private void addToSharedPreferences(String location) {
-        // Provide editor with the key stored in Constants file and the zip code location passed as argument
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+//    private void addToSharedPreferences(String location) {
+//        // Provide editor with the key stored in Constants file and the zip code location passed as argument
+//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+//    }
+
+    // Create method to save location to database
+    public void saveLocationToFirebase(String location) {
+        databaseReference.push().setValue(location);
     }
 }
