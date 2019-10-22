@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Constants;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
@@ -20,6 +22,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = database.getReference();
+
     // Create member variables to store refs to shared preferences tool itself
     private SharedPreferences mSharedPreferences;
     // Create the dedicated tool to edit the foregoing variables.
