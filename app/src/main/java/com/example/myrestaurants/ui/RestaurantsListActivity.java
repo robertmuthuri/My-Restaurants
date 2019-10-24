@@ -1,6 +1,7 @@
 package com.example.myrestaurants.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,8 +10,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.myrestaurants.R;
@@ -36,6 +41,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
     private String mRecentAddress;
+    private SharedPreferences.Editor mEditor;
 
 //    private TextView mLocationTextView; // declare member variable
 //    @BindView(R.id.locationTextView) TextView mLocationTextView;
@@ -91,12 +97,12 @@ public class RestaurantsListActivity extends AppCompatActivity {
         Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
 
         // Call the dedicated preference manager to access shared preferences
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 //        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
-//        if (mRecentAddress != null) {
-//            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
-//        }
+        if (mRecentAddress != null) {
+            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
+        }
 
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override
@@ -140,6 +146,23 @@ public class RestaurantsListActivity extends AppCompatActivity {
             }
         });
     }
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        return true;
+    }
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
         mErrorTextView.setVisibility(View.VISIBLE);
@@ -157,4 +180,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.GONE);
     }
 
+    private void addToSharedPreferences(String location){
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    }
 }
