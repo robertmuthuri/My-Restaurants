@@ -88,22 +88,25 @@ public class RestaurantsListActivity extends AppCompatActivity {
         Intent intent = getIntent();
 //        String myLocation = intent.getParcelable("location"); // pulls out the location value based on the key value we provided.
         String myLocation = Parcels.unwrap(intent.getParcelableExtra("location")); // pulls out the location value based on the key value we provided.
+
+        getRestaurants(myLocation);
 //        mLocationTextView.setText("Here are all the restaurants near: " + location);
 
 //        Log.d("RestaurantActivity", "In the onCreate method!"); // a second log of different importance level
 //        Log.d(TAG, "In the onCreate method!"); // a second log of different importance level
-
-        YelpApi client = YelpClient.getClient();
-        Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
 
         // Call the dedicated preference manager to access shared preferences
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 //        Log.d("Shared Pref Location", "onCreate: " + mRecentAddress);
         if (mRecentAddress != null) {
-            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
+//            call = client.getRestaurants(String.valueOf(mRecentAddress), "restaurants");
+            getRestaurants(mRecentAddress);
         }
-
+    }
+    private void getRestaurants(String myLocation) {
+        YelpApi client = YelpClient.getClient();
+        Call<YelpBusinessesSearchResponse> call = client.getRestaurants(String.valueOf(myLocation), "restaurants");
         call.enqueue(new Callback<YelpBusinessesSearchResponse>() {
             @Override
             public void onResponse(Call<YelpBusinessesSearchResponse> call, Response<YelpBusinessesSearchResponse> response) {
@@ -146,6 +149,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_search, menu);
