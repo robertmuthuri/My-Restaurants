@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //  private Button mFindRestaurantsButton; //adds a member variable to hold our button so that we can access it inside all of our methods
     @BindView(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
+    @BindView(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
+
     public static final String TAG = MainActivity.class.getSimpleName();
 //  private EditText mLocationEditText; // initialize a new member variable for our EditText
     @BindView(R.id.locationEditText) EditText mLocationEditText;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() { // adds a click listener which will be triggered when our button is touched
         mFindRestaurantsButton.setOnClickListener(this); // current context now includes the listener interface, so just pass the current context as argument
+        mSavedRestaurantsButton.setOnClickListener(this);
 //        });
     }
     @Override
@@ -99,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(myIntent); // executes the intent
     //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show(); // makes a toast to confirm that zip location keyed in.
 
+        }
+        if (v == mSavedRestaurantsButton) {
+            Intent intent = new Intent(MainActivity.this, SavedRestaurantListActivity.class);
+            startActivity(intent);
         }
     }
     // Create method which takes user input zip-code as argument

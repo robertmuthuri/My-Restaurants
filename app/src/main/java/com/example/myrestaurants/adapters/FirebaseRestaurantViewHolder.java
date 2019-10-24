@@ -48,12 +48,10 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
     }
     @Override public void onClick(View view) {
         final ArrayList<Business> restaurants = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     restaurants.add(snapshot.getValue(Business.class));
                 }
@@ -67,9 +65,7 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
     }
 }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.adapters.FirebaseRestaurantViewHolder;
@@ -27,6 +28,7 @@ public class SavedRestaurantListActivity extends AppCompatActivity {
     private DatabaseReference mRestaurantsReference;
     private FirebaseRecyclerAdapter<Business, FirebaseRestaurantViewHolder> mFirebaseAdapter;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class SavedRestaurantListActivity extends AppCompatActivity {
         // Set the db reference using the restaurants child node key in Constants class
         mRestaurantsReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
         setUpFirebaseAdapter();
+        hideProgressBar();
     }
 
     // Create method to set up Firebase Adapter;
@@ -73,6 +76,8 @@ public class SavedRestaurantListActivity extends AppCompatActivity {
         super.onStart();
         mFirebaseAdapter.startListening();
     }
+
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -80,4 +85,9 @@ public class SavedRestaurantListActivity extends AppCompatActivity {
             mFirebaseAdapter.stopListening();
         }
     }
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
 }
