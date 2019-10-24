@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
         super.onCreate(savedInstanceState);      // causes android to run all the default behaviours for an activity
         setContentView(R.layout.activity_main); // tells the activity which layout to use on the device screen
         ButterKnife.bind(this);
@@ -86,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mFindRestaurantsButton) {
             String location = mLocationEditText.getText().toString(); // use the getText() method to grab the input value of our EditText view and save to location
             Log.d(TAG, location); // log the input text
-            if (!(location).equals("")) {
-//                addToSharedPreferences(location);
-                saveLocationToFirebase(location);
-            }
+//            if (!(location).equals("")) {
+////                addToSharedPreferences(location);
+//                saveLocationToFirebase(location);
+//            }
 
             // add a toast  - a simple pop up message that automatically fades in and out of the screen when triggered.
             // a toast takes three parameters - a context - a message - a duration
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Add an intent - something our app "intends to do: by describing a simple action you'd like the app to perform; mostly used to start another activity
             Intent myIntent = new Intent(MainActivity.this, RestaurantsListActivity.class); // initiate an instance of the Intent class with the current and next contexts
-            myIntent.putExtra("location", Parcels.wrap(location));
+//            myIntent.putExtra("location", Parcels.wrap(location));
             startActivity(myIntent); // executes the intent
     //                Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show(); // makes a toast to confirm that zip location keyed in.
 
@@ -115,9 +114,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    }
 
     // Create method to save location to database
-    public void saveLocationToFirebase(String location) {
-        databaseReference.push().setValue(location);
-    }
+//    public void saveLocationToFirebase(String location) {
+//        databaseReference.push().setValue(location);
+//    }
     // Add method to destroy value-event-listener when user quits activity
     @Override
     protected void onDestroy() {
