@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String TAG = MainActivity.class.getSimpleName();
 //  private EditText mLocationEditText; // initialize a new member variable for our EditText
-    @BindView(R.id.locationEditText) EditText mLocationEditText;
+//    @BindView(R.id.locationEditText) EditText mLocationEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mFindRestaurantsButton) {
-            String location = mLocationEditText.getText().toString(); // use the getText() method to grab the input value of our EditText view and save to location
-            Log.d(TAG, location); // log the input text
+//            String location = mLocationEditText.getText().toString(); // use the getText() method to grab the input value of our EditText view and save to location
+//            Log.d(TAG, location); // log the input text
 //            if (!(location).equals("")) {
 ////                addToSharedPreferences(location);
 //                saveLocationToFirebase(location);
