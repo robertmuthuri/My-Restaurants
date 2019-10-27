@@ -96,4 +96,14 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             }
         };
     }
+
+    @Override public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+    @Override void onStop() {
+        if (mAuthStateListener != null) {
+            mAuth.removeAuthStateListener(mAuthStateListener);
+        }
+    }
 }
