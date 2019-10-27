@@ -20,6 +20,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        mRegisteredTextView.setOnClickListener(this);
     }
 
     @Override public void onClick(View view) {
