@@ -71,6 +71,8 @@ android {
         implementation 'com.google.firebase:firebase-core:17.2.0'
         // Realtime Firebase dependency
         implementation 'com.google.firebase:firebase-database:19.2.0'
+        // Firebase authentication
+        implementation 'com.google.firebase:firebase-auth:19.1.0'
     }
 }
 
