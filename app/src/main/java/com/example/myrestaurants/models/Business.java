@@ -55,6 +55,9 @@ public class Business {
     @SerializedName("transactions")
     @Expose
     private List<String> transactions = null;
+    @SerializedName("pushId")
+    @Expose
+    private String pushId;
 
     /**
      * No args constructor for use in serialization
@@ -81,7 +84,7 @@ public class Business {
      * @param isClosed
      * @param coordinates
      */
-    public Business(Double rating, String price, String phone, String id, String alias, Boolean isClosed, List<Category> categories, Integer reviewCount, String name, String url, Coordinates coordinates, String imageUrl, Location location, Double distance, List<String> transactions) {
+    public Business(Double rating, String price, String phone, String id, String alias, Boolean isClosed, List<Category> categories, Integer reviewCount, String name, String url, Coordinates coordinates, String imageUrl, Location location, Double distance, List<String> transactions,String pushId) {
         super();
         this.rating = rating;
         this.price = price;
@@ -98,6 +101,7 @@ public class Business {
         this.location = location;
         this.distance = distance;
         this.transactions = transactions;
+        this.pushId = pushId;
     }
 
     public Double getRating() {
@@ -219,5 +223,9 @@ public class Business {
     public void setTransactions(List<String> transactions) {
         this.transactions = transactions;
     }
+
+    public String getPushId() { return pushId; }
+
+    public void setPushId(String pushId) { this.pushId = pushId; }
 
 }
