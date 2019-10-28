@@ -40,6 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private ProgressDialog mAuthProgressDialog;
 
+    private String mName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +76,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
 
-        boolean validName = isValidName(name);
+        mName = mNameEditText.getText().toString().trim();
+
+        boolean validName = isValidName(mName);
         boolean validEmail = isValidEmail(email);
         boolean validPassword = isValidPassword(password, confirmPassword);
+
         if (!validEmail || !validName || !validPassword) return;
         // show progress dialog after validation
         mAuthProgressDialog.show();
