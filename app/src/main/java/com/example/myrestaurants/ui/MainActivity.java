@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Constants;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG = MainActivity.class.getSimpleName();
 //  private EditText mLocationEditText; // initialize a new member variable for our EditText
 //    @BindView(R.id.locationEditText) EditText mLocationEditText;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFindRestaurantsButton.setOnClickListener(this); // current context now includes the listener interface, so just pass the current context as argument
         mSavedRestaurantsButton.setOnClickListener(this);
 //        });
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if ( user != null ) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {}
+            }
+        };
     }
     @Override
     public void onClick(View v) {
@@ -154,5 +169,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+    // On start method
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+    // On stop method
+    @Override
+    public void onStop() {
+        super.onStop();
+        if ( mAuthStateListener != null ) {
+            mAuth.removeAuthStateListener(mAuthStateListener);
+        }
     }
 }
