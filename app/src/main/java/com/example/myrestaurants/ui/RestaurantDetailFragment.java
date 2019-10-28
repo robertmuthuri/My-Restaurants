@@ -63,6 +63,9 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRestaurant = Parcels.unwrap(getArguments().getParcelable("restaurant"));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
