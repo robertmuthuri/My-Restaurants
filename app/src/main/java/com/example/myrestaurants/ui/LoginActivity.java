@@ -35,15 +35,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
     }
-
-    @Override public void onClick(View view) {
+    @Override
+    public void onClick(View view) {
         if (view == mRegisteredTextView) {
             Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
             startActivity(intent);
             finish();
         }
         if (view == mpasswordLoginButton) {
-//            loginWithPassword();
+            loginWithPassword();
+        }
+    }
+    private void loginWithPassword() {
+        String email = mEmailEditText.getText().toString().trim();
+        String password = mPasswordEditText.getText().toString().trim();
+        if (email.equals("")) {
+            mEmailEditText.setError("Please enter your email");
+            return;
+        }
+        if (password.equals("")) {
+            mPasswordEditText.setError("Password cannot be blank!");
+            return;
         }
     }
 }
