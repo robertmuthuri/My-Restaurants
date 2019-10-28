@@ -17,6 +17,8 @@ import com.example.myrestaurants.models.Business;
 import com.example.myrestaurants.models.Constants;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,10 +39,22 @@ public class SavedRestaurantListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
+        // Retrieve current authorized user's UID
+        FirebaseUser user = FirebaseAuth
+                .getInstance()
+                .getCurrentUser();
+        String uid = user.getUid();
+
         // Set the db reference using the restaurants child node key in Constants class
-        mRestaurantsReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        mRestaurantsReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_RESTAURANTS)
+                .child(uid);
+
         setUpFirebaseAdapter();
         hideProgressBar();
+
+
     }
 
     // Create method to set up Firebase Adapter;
