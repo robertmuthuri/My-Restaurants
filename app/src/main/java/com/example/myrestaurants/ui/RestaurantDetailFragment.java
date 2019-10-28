@@ -19,6 +19,8 @@ import com.example.myrestaurants.R;
 import com.example.myrestaurants.models.Business;
 import com.example.myrestaurants.models.Category;
 import com.example.myrestaurants.models.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -115,6 +117,8 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
                     .getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
             restaurantRef.push().setValue(mRestaurant);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
         }
     }
 }
