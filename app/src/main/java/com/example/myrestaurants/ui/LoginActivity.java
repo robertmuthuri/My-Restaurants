@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.passwordEditText) EditText mPasswordEditText;
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     public static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -42,6 +43,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mpasswordLoginButton.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
     }
     @Override
     public void onClick(View view) {
@@ -77,5 +91,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthStateListener);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthStateListener);
     }
 }
