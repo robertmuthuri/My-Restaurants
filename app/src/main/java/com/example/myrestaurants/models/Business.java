@@ -84,7 +84,7 @@ public class Business {
      * @param isClosed
      * @param coordinates
      */
-    public Business(Double rating, String price, String phone, String id, String alias, Boolean isClosed, List<Category> categories, Integer reviewCount, String name, String url, Coordinates coordinates, String imageUrl, Location location, Double distance, List<String> transactions,String pushId) {
+    public Business(Double rating, String price, String phone, String id, String alias, Boolean isClosed, List<Category> categories, Integer reviewCount, String name, String url, Coordinates coordinates, String imageUrl, Location location, Double distance, List<String> transactions) {
         super();
         this.rating = rating;
         this.price = price;
@@ -101,7 +101,6 @@ public class Business {
         this.location = location;
         this.distance = distance;
         this.transactions = transactions;
-        this.pushId = pushId;
     }
 
     public Double getRating() {
